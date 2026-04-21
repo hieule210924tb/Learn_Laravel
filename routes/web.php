@@ -1,11 +1,42 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::get('/tin-tuc', function () {
+//     return view('tintuc');
+// });
+Route::match(['GET', 'POST'], '/tin-tuc', function (Request $request) {
+    //Kiểm tra phương thức
+    if ($request->isMethod('POST')) {
+        return "Phương thức POST đã xảy ra";
+    }
+    return view('tintuc'); //Mặc định xảy ra phương thức get
+});
+// Route::post('/tin-tuc', function () {
+//     return view('post-new');
+// })->name('post-new');
+Route::get('/user', function () {
+    //Lưu tên người dùng lên session
+
+    session(['name' => 'hieule']);
+
+    return 'Tên hiện tại là :' . session('name');
+});
+Route::put('/user', function (Request $request) { // update
+    $newName = $request->input('fullname');
+
+    session(['name' => $newName]);
+
+    return 'Tên sau khi update là :' . session('name');
+})->name('user-get');
+//cập nhật tên người dùng
+
 Route::get('/thong-bao', function () {
     $so1 = app('thongBao');
     $so2 = app('thongBao');
