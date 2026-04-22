@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
@@ -7,6 +8,23 @@ use Illuminate\Support\Facades\Cache;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/trang-chu', [HomeController::class, 'index']); //Route gọi đến controller
+Route::get('/trang-chu2', [HomeController::class, 'index2']);
+Route::get('/trang-chu3', [HomeController::class, 'index3']);
+
+Route::controller(HomeController::class)->group(function () { //Gom nhóm router và gọi đến controller HomeController
+    Route::get('/trang-chu', 'index');
+    Route::get('/trang-chu2', 'index2');
+    Route::get('/trang-chu3', 'index3');
+});
+Route::prefix('admin')->name('admin.')->group(function () { // route nhóm và tiền tố
+    Route::get('/user', function () {
+        return "Hàm route user - admin";
+    });
+    Route::get('/dashboard', function () {
+        return "Hàm route dashboard - admin";
+    });
 });
 // Route::get('/tin-tuc', function () {
 //     return view('tintuc');
@@ -21,12 +39,9 @@ Route::match(['GET', 'POST'], '/tin-tuc', function (Request $request) {
 // Route::post('/tin-tuc', function () {
 //     return view('post-new');
 // })->name('post-new');
-Route::get('/user', function () {
+Route::get('/user/{id}/{type}', function ($id, $type) { // Truyền tham số vào route
     //Lưu tên người dùng lên session
-
-    session(['name' => 'hieule']);
-
-    return 'Tên hiện tại là :' . session('name');
+    return "Người dùng có id là: " . $id . " và type =" . $type;
 });
 Route::put('/user', function (Request $request) { // update
     $newName = $request->input('fullname');
