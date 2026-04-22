@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\Cache;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/trang-chu', [HomeController::class, 'index']); //Route gọi đến controller
+Route::get('/test', function () {
+    return 'ok';
+});
+Route::get('/test/{age}', function () {
+    return 'ok';
+})->name('test-age')->middleware('check.age');
+Route::get('/trang-chu', 'HomeController@index'); //Route gọi đến controller
 Route::get('/trang-chu2', [HomeController::class, 'index2']);
 Route::get('/trang-chu3', [HomeController::class, 'index3']);
 
@@ -26,9 +32,9 @@ Route::prefix('admin')->name('admin.')->group(function () { // route nhóm và t
         return "Hàm route dashboard - admin";
     });
 });
-// Route::get('/tin-tuc', function () {
-//     return view('tintuc');
-// });
+Route::get('/tin-tuc', function () {
+    return view('tintuc');
+});
 Route::match(['GET', 'POST'], '/tin-tuc', function (Request $request) {
     //Kiểm tra phương thức
     if ($request->isMethod('POST')) {
