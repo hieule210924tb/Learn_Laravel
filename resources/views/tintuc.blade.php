@@ -9,13 +9,15 @@
 
 <body>
     <h1>VIEW TIN TUC</h1>
-    <form action="/tin-tuc" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="text" name="fullname" placeholder="Họ tên"> <br>
-        <input type="text" name="email" placeholder="Email"> <br>
-        <!-- <input type="file" name="thumb"> -->
-        <button type="submit">Gửi</button>
-    </form>
+    <p>@if($data %2 ==0 ) Đúng @else Sai @endif</p>
+    @for($i =1 ; $i < $data; $i++) <p>{{$i}}</p> @endfor <form action="/tin-tuc" method="POST"
+            enctype="multipart/form-data">
+            @csrf
+            <input type="text" name="fullname" placeholder="Họ tên"> <br>
+            <input type="text" name="email" placeholder="Email"> <br>
+            <!-- <input type="file" name="thumb"> -->
+            <button type="submit">Gửi</button>
+        </form>
 </body>
 
 </html>

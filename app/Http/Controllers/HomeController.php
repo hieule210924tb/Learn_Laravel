@@ -29,9 +29,7 @@ class HomeController
     }
     public function index2(Request $request)
     {
-        //$request->query: lấy dữ liệu từ URL
-        // $query = $request->query('key');
-        // return "tìm kiếm với keyword là: " . $query;
-        return view('tintuc');
+        $data = 10;
+        return view('tintuc', ['data' => $data]);
     }
 }

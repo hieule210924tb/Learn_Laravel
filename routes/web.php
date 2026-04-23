@@ -59,7 +59,8 @@ Route::match(['GET', 'POST'], '/tin-tuc', function (Request $request) {
     }
     return view('tintuc'); //Mặc định xảy ra phương thức get
 });
-// Route::get('/tin-tuc', [HomeController::class, 'index2']);
+Route::get('/tin-tuc', [HomeController::class, 'index2']);
+// Route::get('/tin-tuc', [HomeController::class, 'index3']);
 // Route::post('/tin-tuc', [HomeController::class, 'index']);
 // Route::post('/tin-tuc', function () {
 //     return view('post-new');
