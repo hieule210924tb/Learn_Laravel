@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
@@ -24,6 +25,13 @@ Route::controller(HomeController::class)->group(function () { //Gom nhóm router
     Route::get('/trang-chu2', 'index2');
     Route::get('/trang-chu3', 'index3');
 });
+
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/product', 'soLuong');
+    Route::get('/product/{soluong}', 'soLuong');
+});
+
+
 Route::prefix('admin')->name('admin.')->group(function () { // route nhóm và tiền tố
     Route::get('/user', function () {
         return "Hàm route user - admin";

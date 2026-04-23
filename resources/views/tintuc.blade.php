@@ -15,6 +15,7 @@
 
 <body>
     <h1>VIEW TIN TUC</h1>
+    <?php echo $soluong ?>
 </body>
 
 </html>
