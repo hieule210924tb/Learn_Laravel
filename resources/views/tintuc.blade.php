@@ -1,9 +1,3 @@
-<!-- <form action="/tin-tuc" method="POST">
-    @csrf
-    <input type="text" name="fullname" placeholder="Họ tên">
-
-    <button type="submit">Gửi</button>
-</form> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +9,13 @@
 
 <body>
     <h1>VIEW TIN TUC</h1>
-    <?php echo $soluong ?>
+    <form action="/tin-tuc" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="text" name="fullname" placeholder="Họ tên"> <br>
+        <input type="text" name="email" placeholder="Email"> <br>
+        <!-- <input type="file" name="thumb"> -->
+        <button type="submit">Gửi</button>
+    </form>
 </body>
 
 </html>

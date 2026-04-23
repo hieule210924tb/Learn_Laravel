@@ -26,10 +26,10 @@ Route::controller(HomeController::class)->group(function () { //Gom nhóm router
     Route::get('/trang-chu3', 'index3');
 });
 
-Route::controller(ProductController::class)->group(function () {
-    Route::get('/product', 'soLuong');
-    Route::get('/product/{soluong}', 'soLuong');
-});
+// Route::controller(ProductController::class)->group(function () {
+//     Route::get('/product', 'soLuong');
+//     // Route::get('/product/{soluong}', 'soLuong');
+// });
 
 
 Route::prefix('admin')->name('admin.')->group(function () { // route nhóm và tiền tố
@@ -50,6 +50,8 @@ Route::match(['GET', 'POST'], '/tin-tuc', function (Request $request) {
     }
     return view('tintuc'); //Mặc định xảy ra phương thức get
 });
+Route::get('/tin-tuc', [HomeController::class, 'index2']);
+Route::post('/tin-tuc', [HomeController::class, 'index']);
 // Route::post('/tin-tuc', function () {
 //     return view('post-new');
 // })->name('post-new');
