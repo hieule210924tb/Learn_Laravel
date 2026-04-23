@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
 
@@ -11,11 +12,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/test', function () {
-    return 'ok';
+    //response : về một chuôi json
+    // return response()->json([
+    //     'name' => 'hieule',
+    //     'email' => 'hiele@gmail.com'
+    // ], 403);
+
+    // return response('Nội dung', 200)->header('Content-Type', 'text/plain');
+    //response	Một file tải về
+    return response()->download(storage_path('/app/private/images/gR2ZN1cdUHyTth5htJ3CkFVA1oPJqozkvUUCQskn.png'));
 });
-Route::get('/test/{age}', function () {
-    return 'ok';
-})->name('test-age')->middleware('check.age');
+// Route::get('/test/{age}', function () {
+//     return 'ok';
+// })->name('test-age')->middleware('check.age');
 Route::get('/trang-chu', 'HomeController@index'); //Route gọi đến controller
 Route::get('/trang-chu2', [HomeController::class, 'index2']);
 Route::get('/trang-chu3', [HomeController::class, 'index3']);
@@ -50,8 +59,8 @@ Route::match(['GET', 'POST'], '/tin-tuc', function (Request $request) {
     }
     return view('tintuc'); //Mặc định xảy ra phương thức get
 });
-Route::get('/tin-tuc', [HomeController::class, 'index2']);
-Route::post('/tin-tuc', [HomeController::class, 'index']);
+// Route::get('/tin-tuc', [HomeController::class, 'index2']);
+// Route::post('/tin-tuc', [HomeController::class, 'index']);
 // Route::post('/tin-tuc', function () {
 //     return view('post-new');
 // })->name('post-new');
