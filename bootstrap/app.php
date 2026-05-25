@@ -17,8 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'check.age' => App\Http\Middleware\CheckOld::class,
             'check.work' => App\Http\Middleware\CheckWork::class,
+            'admin.auth' => App\Http\Middleware\AdminAuthenticate::class
         ]);
     })
+
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
