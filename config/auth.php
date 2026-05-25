@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin;
 use App\Models\Post;
 use App\Models\User;
 
@@ -43,6 +44,10 @@ return [
             'driver' => 'session', //cách xác thực là dùng driver 
             'provider' => 'users', // Giúp cho laravel biết được là lấy từ bảng nào và từ model nào 
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -67,15 +72,12 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
         ],
-        'posts' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', Post::class),
-        ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*
