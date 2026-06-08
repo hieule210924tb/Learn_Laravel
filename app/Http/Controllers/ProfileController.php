@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -20,7 +21,14 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
-
+    public function showDashboard()
+    {
+        if (Gate::allows('access-admin')) {
+            return view('dashboard');
+        } else {
+            abort(403);
+        }
+    }
     /**
      * Update the user's profile information.
      */
