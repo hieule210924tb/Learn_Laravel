@@ -23,11 +23,11 @@ class ProfileController extends Controller
     }
     public function showDashboard()
     {
-        if (Gate::allows('access-admin')) {
-            return view('dashboard');
-        } else {
-            abort(403);
-        }
+        // if (Gate::allows('access-admin')) {
+        //     return view('dashboard');
+        // } else {
+        //     abort(403);
+        // }
     }
     /**
      * Update the user's profile information.
