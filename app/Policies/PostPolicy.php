@@ -17,19 +17,20 @@ class PostPolicy
     /**
      * Determine whether the user can view any models.
      * Ai cũng xem được danh sách
+     * ?User = User|null
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
-     * Ai cũng xem được những bài đã public , bài nào chưa public chỉ mỗi tác giả xem được
+     * Ai cũng xem được những bài đã publish , bài nào chưa public chỉ mỗi tác giả xem được
      */
     public function view(User $user, Post $post): bool
     {
-        return false;
+        return $post->is_public || ($user && $user->id === $post->user_id); //return true
     }
 
     /**
@@ -38,7 +39,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -56,7 +57,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return false;
+        return $user->id === $post->user_id;
     }
 
     /**
@@ -66,7 +67,7 @@ class PostPolicy
      */
     public function restore(User $user, Post $post): bool
     {
-        return false;
+        return $user->id === $post->user_id;
     }
 
     /**
@@ -74,6 +75,6 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post): bool
     {
-        return false;
+        return $user->id === $post->user_id;
     }
 }
